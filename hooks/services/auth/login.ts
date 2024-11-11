@@ -1,4 +1,6 @@
 import { useForm } from "vue-hooks-form";
+import { useMutation } from "@tanstack/vue-query";
+import SERVICE_AUTH from "~/services/auth";
 
 export default function useLogin() {
   useSeoMeta({
@@ -10,17 +12,35 @@ export default function useLogin() {
     defaultValues: {},
   });
   const email = useField("email", {
-    rule: { required: true },
+    rule: { required: true,  type: "email" },
   });
   const password = useField("password", {
     rule: {
       required: true,
     },
   });
-  const onSubmit = (data: any) => console.log(data);
+
+  const loginHandler = useMutation<ITLoginToken, any, ITLogin, any>({
+    mutationFn: async (data) => {
+      try {
+        const res = await SERVICE_AUTH.login(data);
+        return res;
+      } catch (error) {
+        console.log(error);
+        
+        throw error;
+      }
+    },
+  });
+
+  const onSubmit = async (data: any) => {
+    await loginHandler.mutateAsync(data);
+  };
+
   return {
     email,
     password,
+    loginHandler,
     onSubmit: handleSubmit(onSubmit),
   };
 }

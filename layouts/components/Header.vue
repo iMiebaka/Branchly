@@ -12,7 +12,9 @@ import SiteName from './SiteName.vue';
                         <NuxtLink href="/blog">Blogs</NuxtLink>
                     </li>
                     <li class="hover:text-white">
-                        <NuxtLink href="/auth/login">Login</NuxtLink>
+
+                        <NuxtLink v-if="Boolean(useCookie('access_token').value)" href="/account">Account</NuxtLink>
+                        <NuxtLink v-else href="/auth/login">Login</NuxtLink>
                     </li>
                 </ul>
             </nav>

@@ -1,8 +1,10 @@
 <script setup>
 import useCreateAccount from '~/hooks/services/auth/createAccount';
+import SpinnerTwo from '~/layouts/components/Loader/SpinnerTwo.vue';
 import SiteName from '~/layouts/components/SiteName.vue';
 
-const { name, email, password, onSubmit } = useCreateAccount()
+const { name, email, password, onSubmit, createAccountHandler } = useCreateAccount()
+
 </script>
 <template>
     <main class="bg-slate-900 text-gray-100 h-screen grid place-items-center">
@@ -21,11 +23,14 @@ const { name, email, password, onSubmit } = useCreateAccount()
                 <input :ref="password.ref" v-model="password.value" type="password" placeholder="Enter Password"
                     class="rounded-md w-full appearance-none bg-slate-900 focus:outline-none p-2" />
                 <p class="text-red-400 text-sm" v-if="password.error">{{ password.error.message }}</p>
-
+                <p class="text-red-400 text-sm" v-if="createAccountHandler?.isError.value"> {{
+                    createAccountHandler.error.value.message
+                }}</p>
                 <button
                     class="mt-2 w-full p-3 shrink-0 rounded-md bg-gradient-to-br from-sky-500 to-cyan-400 px-3 py-2 text-sm font-medium hover:from-sky-700 disabled:bg-sky-700 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-600/50"
                     type="submit">
-                    Create Account
+                    <SpinnerTwo v-if="createAccountHandler?.isPending.value" />
+                    <span v-else>Create Account</span>
                 </button>
                 <div class="text-sm">Do you have an account? <NuxtLink class="text-cyan-400 hover:underline"
                         href="/auth/login">Login</NuxtLink>

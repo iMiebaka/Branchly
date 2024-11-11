@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import Footer from '~/layouts/components/Footer.vue';
 import Header from '~/layouts/components/Header.vue';
+
+useSeoMeta({
+    title: "Branchly",
+    description: "Branchly for all content",
+});
 </script>
 
 <template>

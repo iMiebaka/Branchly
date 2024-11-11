@@ -6,17 +6,23 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "preview": "nuxt preview"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.8.1",
     "nuxt": "^3.14.159",
     "tanstack-query": "^1.0.0",
+    "uuid": "^11.0.3",
     "vue": "latest",
     "vue-hooks-form": "^0.3.1",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
+    "@types/jsonwebtoken": "^9.0.7",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.48",
     "prettier": "^3.3.3",
