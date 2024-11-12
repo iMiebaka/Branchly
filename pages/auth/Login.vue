@@ -1,7 +1,7 @@
 <script setup>
 import useLogin from '~/hooks/services/auth/login';
-import SpinnerTwo from '~/layouts/components/Loader/SpinnerTwo.vue';
-import SiteName from '~/layouts/components/SiteName.vue';
+import SpinnerTwo from '~/components/Loader/SpinnerTwo.vue';
+import SiteName from '~/components/SiteName.vue';
 
 const { email, password, onSubmit, loginHandler } = useLogin()
 
@@ -30,7 +30,7 @@ const { email, password, onSubmit, loginHandler } = useLogin()
 
                 <p class="text-red-400 text-sm" v-if="loginHandler?.isError.value"> {{
                     loginHandler?.error?.value?.message
-                    }}</p>
+                }}</p>
                 <button
                     class="mt-2 w-full p-3 shrink-0 rounded-md bg-gradient-to-br from-sky-500 to-cyan-400 px-3 py-2 text-sm font-medium hover:from-sky-700 disabled:bg-sky-700 hover:to-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-600/50"
                     type="submit">

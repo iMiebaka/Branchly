@@ -1,7 +1,7 @@
 // import API_V1_ROUTE from "./routes/api-v1";
 
 export default async function api<T>({
-  data = {},
+  data = undefined,
   url,
   secure,
   method = "GET",
@@ -16,34 +16,22 @@ export default async function api<T>({
       "Content-type": "application/json",
     };
     if (secure || secure == undefined) {
-      headers["Authorization"] = `Bearer ${useCookie("access")}`;
+      headers["Authorization"] = `Bearer ${useCookie("access_token").value}`;
     }
     try {
-      const response = await fetch(
-        url,
-        {
-          method,
-          headers,
-          body: JSON.stringify(data),
-        }
-      );
-      if (!response.ok) {
-        if (response.json) {
-          const err = await response.json();
+      const response = await useFetch(url, {
+        method,
+        headers,
+        body: data,
+      });
 
-          return reject({ ...err, statusCode: response.status });
-        } else {
-          reject({
-            details: "Something went wrong",
-            statusCode: response.status,
-          });
-        }
-      }
-      if (response.status == 204) {
-        return resolve("" as T);
+      if (response.status.value != "success") {
+        return reject({
+          details: "Something went wrong",
+          statusCode: response.status.value,
+        });
       } else {
-        const result: T = await response.json();
-        return resolve(result);
+        return resolve(response.data.value as T);
       }
     } catch (err: any) {
       reject({ detail: err.message });
@@ -58,7 +46,7 @@ export default async function api<T>({
 //       {
 //         method: "POST",
 //         body: JSON.stringify({
-//           refresh_token: Cookie.get("refresh"),
+//           refresh_token: Cookie.get("refresh_token"),
 //         }),
 //         headers: {
 //           "Content-type": "application/json",

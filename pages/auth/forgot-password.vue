@@ -1,7 +1,7 @@
 <script setup>
 import useForgotPassword from '~/hooks/services/auth/forgotPassword';
-import SpinnerTwo from '~/layouts/components/Loader/SpinnerTwo.vue';
-import SiteName from '~/layouts/components/SiteName.vue';
+import SpinnerTwo from '~/components/Loader/SpinnerTwo.vue';
+import SiteName from '~/components/SiteName.vue';
 
 const { email, onSubmit, resetPasswordHandler } = useForgotPassword()
 

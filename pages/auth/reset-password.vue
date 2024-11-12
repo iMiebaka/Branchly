@@ -1,8 +1,8 @@
 <script setup>
 import { useResetPassword } from '~/hooks/services/auth/resetPassword';
-import SpinnerTwo from '~/layouts/components/Loader/SpinnerTwo.vue';
-import ResetPasswordChecker from '~/layouts/components/ResetPasswordChecker.vue';
-import SiteName from '~/layouts/components/SiteName.vue';
+import SpinnerTwo from '~/components/Loader/SpinnerTwo.vue';
+import ResetPasswordChecker from '~/components/ResetPasswordChecker.vue';
+import SiteName from '~/components/SiteName.vue';
 
 
 const { password, checkPassword, onSubmit, checkTokenQuery, resetPasswordHandler } = useResetPassword()

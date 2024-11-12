@@ -2,8 +2,8 @@
 const route = useRoute()
 console.log(route.params)
 
-import Footer from '~/layouts/components/Footer.vue';
-import Header from '~/layouts/components/Header.vue';
+import Footer from '~/components/Footer.vue';
+import Header from '~/components/Header.vue';
 
 </script>
 

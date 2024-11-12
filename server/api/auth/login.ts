@@ -4,9 +4,12 @@ import { validateLogin } from "~/server/utils/validators/auth";
 
 export default defineEventHandler(
   async (event: H3Event<EventHandlerRequest>) => {
+    if (event.node.req.method === "GET") {
+      return {};
+    }
     if (event.node.req.method === "POST") {
-      const body = await readBody(event);
 
+      const body = await readBody(event);
       const { email, password } = validateLogin(body);
 
       try {
@@ -24,7 +27,7 @@ export default defineEventHandler(
         throw createError({
           statusCode: 400,
           statusMessage: "Bad Request",
-          message: error
+          message: error,
         });
       }
     }
