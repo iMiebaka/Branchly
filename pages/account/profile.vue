@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Sidebar from '~/components/Sidebar.vue';
 
-
+useSeoMeta({
+    title: "Profile - Branchly",
+});
 </script>
 
 <template>
